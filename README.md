@@ -1,82 +1,39 @@
-# Network-API-Testing
+# Cisco SD-WAN Network API Testing (Enhanced)
 
-🚀 Cisco SD-WAN API Test Automation
-This project automates API testing for Cisco SD-WAN vManage using Python, Pytest, and Docker. It authenticates with Cisco's vManage sandbox, retrieves device inventory, performs negative testing, and generates HTML and Allure reports with code coverage.
+[![API Tests](https://github.com/yourusername/network-api-testing/actions/workflows/api-tests.yml/badge.svg)](https://github.com/yourusername/network-api-testing/actions)
 
-📦 Features
-🔐 Login to Cisco vManage via APIs
+## 🚀 Features
 
-📋 Fetch SD-WAN device inventory
+- ✅ Auth, inventory, interface, event, and template API tests
+- 🧪 Pytest + Allure + Code Coverage
+- 🐳 Dockerized test execution
+- 🔁 GitHub Actions CI/CD with badge support
 
-✅ Positive and Negative Test Cases
+## 🐳 Run with Docker
 
-📊 Pytest HTML & Allure Reporting
+```bash
+docker build -t sdwan-tests .
+docker run --rm sdwan-tests
+```
 
-☁️ Dockerized for CI/CD Compatibility
+Or with docker-compose:
 
-📈 Code Coverage with pytest-cov
-
-🛠️ Tech Stack
-Python 3.10
-
-Pytest
-
-Requests
-
-Pytest-HTML
-
-Allure Pytest
-
-Docker + Docker Compose
-
-📁 Project Structure
-bash
-Copy
-Edit
-.
-├── auth.py                # vManage login & token fetch
-├── api_helper.py          # Generic GET method
-├── get_inventory.py       # Manual script to print devices
-├── tests/
-│   ├── test_inventory.py  # Positive test for inventory
-│   ├── test_negative.py   # Invalid auth / bad endpoint
-│   └── test_token.py      # Token retrieval test
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── reports/               # HTML & Allure reports
-└── README.md
-🚀 How to Run
-🔹 Local (venv)
-bash
-Copy
-Edit
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run tests with HTML report
-pytest tests/ --html=report.html --self-contained-html --cov=. --cov-report=html
-🔹 Docker
-bash
-Copy
-Edit
+```bash
 docker-compose up --build
-📈 Reports
-✅ report.html – Pytest test results
+```
 
-🧪 htmlcov/index.html – Code coverage
+## 📊 Generate Allure Report (Locally)
 
-📊 reports/allure-report/index.html – Allure dashboard
+```bash
+# Inside container or local venv
+pytest --alluredir=allure-results
+allure generate allure-results -o reports/allure-report --clean
+allure open reports/allure-report
+```
 
-🔐 Cisco Sandbox Used
-URL: https://sandbox-sdwan-2.cisco.com
+## 📈 Coverage Report
 
-Username: admin
+After running tests:
 
-Password: C1sco12345
-
-You must have access to Cisco DevNet to use this sandbox.
+- Terminal summary
+- HTML output at `htmlcov/index.html`
